@@ -1,23 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {digestMessage, sha256, hexString} from "./utils";
+var jwt = require('jsonwebtoken');
+
+let token;
+sha256("1234").then(secret => {
+    token = jwt.sign({ foo: 'bar' }, secret);
+    console.info("secret", secret);
+    console.info("token", token);
+});
+
+let token2;
+digestMessage("1234").then(digest => {
+    token2 = jwt.sign({ foo: 'bar' }, hexString(digest));
+    console.info("secret2", hexString(digest));
+    console.info("token2", token2);
+});
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          <pre>
+          {token}
+          </pre>
+          <pre>
+          {token2}
+          </pre>
       </header>
     </div>
   );
