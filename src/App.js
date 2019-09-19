@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {digestMessage, hexString} from "./utils";
+import HmacSection from "./HmacSection";
 var jwt = require('jsonwebtoken');
 
 // let token;
@@ -36,6 +37,7 @@ function App() {
                 <input name="secret" id={"secret"}/>
                 <button onClick={(e) => onClickHandler(e)}>Click</button>
             </header>
+            <HmacSection />
         </div>
     );
 }
